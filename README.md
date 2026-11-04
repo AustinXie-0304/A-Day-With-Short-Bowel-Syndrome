@@ -2,7 +2,7 @@
 
 > 一个约 6 分钟的互动科普。你扮演一位短肠综合征患者，从早上六点四十到深夜十一点半，做完 9 个真实的决定。
 
-**[→ 在线体验](https://austinxie-0304.github.io/A-Day-with-Short-Bowel-Syndrome/)**
+**[→ 在线体验](https://austinxie-0304.github.io/A-Day-With-Short-Bowel-Syndrome/)**
 
 ---
 
