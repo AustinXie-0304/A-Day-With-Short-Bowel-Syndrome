@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="6IkaQ25Pt9mD8ePoWktpcf">
+<head data-page-node-id="bOwhalDANGde6KTnGGy7Zh">
+<meta charset="UTF-8" data-page-node-id="FZarIYo6HRh8rP1LeUofXR">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="6bDNNWgIh9d68yzq0NyLWH">
+<title>你的一天 · 短肠综合征互动科普</title>
+<meta name="description" content="扮演一位短肠综合征患者，从早到晚完成 9 个真实决策，看见「吃饭、喝水、上厕所」这些小事在另一种人生里的复杂度。" data-page-node-id="6AQJlHKZfp11kndAYCSyWe">
+<meta name="theme-color" content="#FAF7F2" data-page-node-id="YBRUqZ8b8miJWVe7lzdUuQ">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2317635F'/%3E%3Cpath d='M6 19c3 0 3-6 6-6s3 6 6 6 3-6 6-6' stroke='%23FAF7F2' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" data-page-node-id="fXSuNi6mS6ZIFgKeqDT5Ix">
+<style>
+:root{
+  --paper:#FAF7F2;
+  --card:#FFFFFF;
+  --ink:#22201D;
+  --ink2:#5E5951;
+  --ink3:#958F84;
+  --line:#E8E1D5;
+  --line2:#F1EBE0;
+  --teal:#17635F;
+  --teal-2:#2A8380;
+  --teal-soft:#E6F1EE;
+  --amber:#B97A28;
+  --amber-soft:#FBEFDC;
+  --rose:#AC4F3F;
+  --rose-soft:#F8E8E3;
+  --serif:"Songti SC","Noto Serif SC","Source Han Serif SC","STSong","SimSun",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --r:16px;
+  --shadow:0 1px 2px rgba(34,32,29,.04),0 8px 24px -12px rgba(34,32,29,.12);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  min-height:100vh;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 12% -8%,#E9F2EF 0%,rgba(233,242,239,0) 62%),
+    radial-gradient(760px 520px at 92% 2%,#FBF0E0 0%,rgba(251,240,224,0) 58%);
+}
+#app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column}
+
+/* ============ HUD ============ */
+.hud{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,247,242,.86);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line2);
+  transition:opacity .35s,transform .35s;
+}
+.hud.hidden{opacity:0;transform:translateY(-100%);pointer-events:none}
+.hud-inner{
+  max-width:880px;margin:0 auto;padding:11px 22px;
+  display:flex;align-items:center;gap:22px;
+}
+.clock{display:flex;flex-direction:column;line-height:1.15;min-width:74px}
+.clock b{
+  font-family:var(--serif);font-size:23px;font-weight:600;
+  letter-spacing:.02em;font-variant-numeric:tabular-nums;color:var(--ink);
+}
+.clock small{font-size:10.5px;color:var(--ink3);letter-spacing:.09em;margin-top:2px}
+.stats{display:flex;gap:15px;flex:1}
+.stat{flex:1;min-width:0}
+.s-label{
+  display:block;font-size:10px;color:var(--ink3);letter-spacing:.11em;
+  margin-bottom:5px;white-space:nowrap;
+}
+.bar{height:4px;border-radius:99px;background:#EDE7DC;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:99px;transition:width .7s cubic-bezier(.22,.9,.24,1)}
+#barH{background:linear-gradient(90deg,#3E918C,#17635F)}
+#barE{background:linear-gradient(90deg,#DDA75A,#B97A28)}
+#barC{background:linear-gradient(90deg,#D0887A,#AC4F3F)}
+.cost{
+  flex:0 0 auto;padding-left:16px;border-left:1px solid var(--line);
+}
+.c-label{
+  display:block;font-size:10px;color:var(--ink3);letter-spacing:.11em;
+  margin-bottom:5px;white-space:nowrap;
+}
+.c-val{display:block;line-height:1;white-space:nowrap}
+.c-val b{
+  font-family:var(--serif);font-size:18px;color:var(--rose);
+  font-variant-numeric:tabular-nums;font-weight:600;
+}
+.c-val b.bump{animation:bump .5s ease}
+.c-val i{font-style:normal;font-size:10px;color:var(--ink3);margin-left:2px}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.22)}100%{transform:scale(1)}}
+.track{height:2px;background:var(--line2);position:relative;overflow:hidden}
+.track-fill{height:100%;width:0;background:linear-gradient(90deg,#3E918C,#17635F);transition:width .8s cubic-bezier(.22,.9,.24,1)}
+
+/* ============ STAGE ============ */
+main{
+  flex:1;width:100%;max-width:880px;margin:0 auto;
+  padding:44px 22px 120px;
+  display:flex;flex-direction:column;
+}
+.screen{animation:rise .55s cubic-bezier(.2,.75,.25,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ============ COVER ============ */
+.cover{max-width:660px;margin:auto;text-align:center;padding-top:0}
+.cover .kicker{
+  display:inline-block;font-size:10.5px;letter-spacing:.34em;color:var(--teal);
+  border:1px solid #CFE0DC;background:var(--teal-soft);
+  padding:5px 14px 5px 16px;border-radius:99px;margin-bottom:30px;
+}
+.cover h1{
+  font-family:var(--serif);font-size:clamp(38px,7.2vw,60px);
+  font-weight:600;line-height:1.16;margin:0 0 6px;letter-spacing:.01em;
+}
+.cover h1 em{font-style:normal;color:var(--teal);position:relative;white-space:nowrap}
+.cover h1 em::after{
+  content:"";position:absolute;left:0;right:0;bottom:.07em;height:.34em;
+  background:linear-gradient(90deg,rgba(42,131,128,.16),rgba(42,131,128,.07));
+  border-radius:2px;z-index:-1;
+}
+.cover .sub{
+  font-family:var(--serif);font-size:clamp(15px,2.6vw,18px);
+  color:var(--ink2);margin:14px 0 0;letter-spacing:.04em;
+}
+.cover .desc{
+  font-size:14.5px;color:var(--ink2);max-width:470px;
+  margin:24px auto 0;line-height:1.95;text-align:left;
+}
+.cover .desc strong{color:var(--ink);font-weight:600}
+.wave{margin:26px auto 0;display:block;width:min(100%,420px);height:40px;opacity:.85}
+.enter{
+  margin-top:36px;display:inline-flex;align-items:center;gap:10px;
+  background:var(--teal);color:#fff;border:0;border-radius:99px;
+  padding:15px 34px;font-size:15px;font-family:var(--sans);
+  cursor:pointer;letter-spacing:.06em;transition:.25s;box-shadow:0 10px 26px -12px rgba(23,99,95,.75);
+}
+.enter:hover{background:#125451;transform:translateY(-1px);box-shadow:0 14px 30px -12px rgba(23,99,95,.85)}
+.enter:active{transform:translateY(0) scale(.985)}
+.enter svg{width:15px;height:15px}
+.cover .meta{
+  margin-top:26px;font-size:11.5px;color:var(--ink3);letter-spacing:.06em;
+}
+.cover .meta span{margin:0 7px}
+
+/* ============ SCENE ============ */
+.scene{max-width:700px;margin:0 auto}
+.scene-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.time-chip{
+  font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:.06em;
+  color:var(--teal);background:var(--teal-soft);border-radius:99px;
+  padding:5px 13px;font-variant-numeric:tabular-nums;
+}
+.tag{
+  font-size:10.5px;letter-spacing:.2em;color:var(--ink3);
+  padding:5px 0;
+}
+.tag::before{content:"";display:inline-block;width:14px;height:1px;background:var(--ink3);vertical-align:middle;margin-right:8px;opacity:.5}
+.scene h1{
+  font-family:var(--serif);font-size:clamp(25px,4.4vw,33px);
+  font-weight:600;line-height:1.35;margin:0 0 16px;letter-spacing:.01em;
+}
+.lead{font-size:15px;color:var(--ink2);line-height:1.95;margin:0 0 20px}
+.lead strong{color:var(--ink);font-weight:600;background:linear-gradient(transparent 62%,#FBEFDC 62%)}
+.status{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 26px}
+.status span{
+  font-size:11.5px;color:var(--ink2);background:var(--card);
+  border:1px solid var(--line);border-radius:8px;padding:5px 10px;
+  font-variant-numeric:tabular-nums;
+}
+.status span::before{
+  content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--teal-2);margin-right:6px;vertical-align:middle;opacity:.75;
+}
+.ask{
+  font-size:13px;color:var(--ink3);letter-spacing:.05em;
+  margin:0 0 12px;display:flex;align-items:center;gap:8px;
+}
+.ask::after{content:"";flex:1;height:1px;background:var(--line2)}
+
+/* ============ CHOICES ============ */
+.choices{display:flex;flex-direction:column;gap:10px}
+.choice{
+  display:block;width:100%;text-align:left;cursor:pointer;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:15px 17px;font-family:var(--sans);color:var(--ink);
+  transition:.2s;position:relative;
+}
+.choice:hover:not(:disabled){border-color:#CFC6B6;transform:translateY(-1px);box-shadow:var(--shadow)}
+.choice:disabled{cursor:default}
+.choice .ct{display:block;font-size:14.5px;font-weight:500;line-height:1.55}
+.choice .cs{display:block;font-size:12px;color:var(--ink3);margin-top:3px;line-height:1.5}
+.choice.picked{border-color:var(--teal);background:var(--teal-soft)}
+.choice.picked.ok{border-color:#4E9E86;background:#EAF5EF}
+.choice.picked.bad{border-color:#C97F6E;background:var(--rose-soft)}
+.choice.picked.soft{border-color:#DCAF6F;background:var(--amber-soft)}
+.choice.reveal{border-color:#4E9E86;border-style:dashed;background:#F4FAF7}
+.choice.dim{opacity:.45}
+
+/* ============ MULTI ============ */
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.pick{
+  cursor:pointer;background:var(--card);border:1px solid var(--line);
+  border-radius:11px;padding:13px 14px;text-align:left;font-family:var(--sans);
+  color:var(--ink);transition:.18s;position:relative;
+}
+.pick:hover:not(:disabled){border-color:#CFC6B6}
+.pick .pn{display:block;font-size:13.5px;font-weight:500;line-height:1.45}
+.pick .pd{display:block;font-size:11px;color:var(--ink3);margin-top:2px}
+.pick .mark{
+  position:absolute;top:9px;right:10px;width:15px;height:15px;border-radius:50%;
+  border:1.5px solid var(--line);transition:.18s;
+}
+.pick.on{border-color:var(--teal);background:var(--teal-soft)}
+.pick.on:hover{border-color:var(--teal)}
+.pick.on .mark{border-color:var(--teal);background:var(--teal);box-shadow:inset 0 0 0 3px #fff}
+.pick:disabled{cursor:default}
+.pick.right{border-color:#4E9E86;background:#EAF5EF}
+.pick.wrong{border-color:#C97F6E;background:var(--rose-soft);opacity:.85}
+
+/* ============ SLIDER ============ */
+.slider-wrap{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+.slider-val{
+  font-family:var(--serif);font-size:40px;font-weight:600;color:var(--teal);
+  text-align:center;line-height:1;font-variant-numeric:tabular-nums;
+}
+.slider-val small{font-size:14px;color:var(--ink3);margin-left:3px;font-family:var(--sans)}
+.slider-hint{text-align:center;font-size:12px;color:var(--ink3);margin-top:7px;min-height:19px;transition:.2s}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:99px;
+  background:linear-gradient(90deg,var(--teal-soft),#DDD5C7);outline:none;margin:24px 0 8px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:24px;height:24px;border-radius:50%;
+  background:#fff;border:2px solid var(--teal);cursor:grab;
+  box-shadow:0 2px 8px rgba(23,99,95,.28);transition:.15s;
+}
+input[type=range]::-webkit-slider-thumb:active{cursor:grabbing;transform:scale(1.12)}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;background:#fff;
+  border:2px solid var(--teal);cursor:grab;box-shadow:0 2px 8px rgba(23,99,95,.28);
+}
+.scale{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);padding:0 2px}
+
+/* ============ SEQUENCE ============ */
+.seq{display:flex;flex-direction:column;gap:9px;margin-bottom:16px}
+.seq-item{
+  cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:11px;
+  padding:13px 15px;text-align:left;font-family:var(--sans);color:var(--ink);
+  font-size:13.5px;line-height:1.55;transition:.18s;display:flex;gap:11px;align-items:flex-start;
+}
+.seq-item:hover:not(:disabled){border-color:#CFC6B6}
+.seq-item .num{
+  flex:0 0 21px;height:21px;border-radius:50%;background:#F2EDE4;color:var(--ink3);
+  font-size:11px;display:flex;align-items:center;justify-content:center;
+  font-variant-numeric:tabular-nums;transition:.2s;margin-top:1px;
+}
+.seq-item.on{border-color:var(--teal);background:var(--teal-soft)}
+.seq-item.on:hover{border-color:var(--teal)}
+.seq-item.on .num{background:var(--teal);color:#fff}
+.seq-item:disabled{cursor:default}
+.seq-item.rt{border-color:#4E9E86;background:#EAF5EF}
+.seq-item.rw{border-color:#C97F6E;background:var(--rose-soft)}
+
+/* ============ FORMULA ============ */
+.formula{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 20px 20px}
+.fgroup{padding:16px 0;border-bottom:1px solid var(--line2)}
+.fgroup:last-of-type{border-bottom:0;padding-bottom:6px}
+.fq{font-size:13.5px;color:var(--ink);margin-bottom:11px;font-weight:500}
+.fq span{color:var(--ink3);font-weight:400;font-size:12px;margin-left:6px}
+.fopts{display:flex;gap:8px;flex-wrap:wrap}
+.fopt{
+  cursor:pointer;border:1px solid var(--line);background:#FCFAF6;border-radius:99px;
+  padding:8px 16px;font-size:12.5px;font-family:var(--sans);color:var(--ink2);transition:.18s;
+}
+.fopt:hover:not(:disabled){border-color:#CFC6B6;color:var(--ink)}
+.fopt.on{border-color:var(--teal);background:var(--teal);color:#fff}
+.fopt.on:hover{color:#fff;border-color:var(--teal)}
+.fopt.on.wrong{background:var(--rose);border-color:var(--rose)}
+.fopt.on.wrong:hover{background:var(--rose);border-color:var(--rose)}
+.fopt.reveal{border-color:#4E9E86;border-style:dashed;color:#2E7A63}
+.fopt:disabled{cursor:default}
+
+/* ============ SUBMIT ============ */
+.submit{
+  margin-top:18px;width:100%;padding:14px;border-radius:12px;border:0;
+  background:var(--teal);color:#fff;font-family:var(--sans);font-size:14.5px;
+  cursor:pointer;letter-spacing:.06em;transition:.22s;
+  box-shadow:0 8px 20px -12px rgba(23,99,95,.7);
+}
+.submit:hover:not(:disabled){background:#125451}
+.submit:disabled{background:#EBE4D8;color:#8B8173;cursor:not-allowed;box-shadow:none}
+
+/* ============ FEEDBACK ============ */
+.feedback{margin-top:26px;scroll-margin-top:82px}
+.fb{animation:rise .5s cubic-bezier(.2,.75,.25,1) both}
+.verdict{display:flex;gap:13px;align-items:flex-start;border-radius:13px;padding:16px 18px;margin-bottom:18px}
+.verdict.good{background:#EAF5EF;border:1px solid #C6E2D4}
+.verdict.mid{background:var(--amber-soft);border:1px solid #EFD9B4}
+.verdict.bad{background:var(--rose-soft);border:1px solid #EBCFC7}
+.v-icon{
+  flex:0 0 26px;height:26px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:13px;font-weight:700;color:#fff;margin-top:1px;
+}
+.good .v-icon{background:#3E8C72}
+.mid .v-icon{background:var(--amber)}
+.bad .v-icon{background:var(--rose)}
+.verdict .vt{font-size:14px;font-weight:600;margin:0 0 5px;line-height:1.5}
+.verdict .vx{font-size:13.5px;color:var(--ink2);margin:0;line-height:1.85}
+.verdict .vx strong{color:var(--ink);font-weight:600}
+
+.compare{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card);
+}
+.cmp{padding:17px 18px}
+.cmp.normal{background:#F6F2EA;border-right:1px solid var(--line)}
+.cmp.patient{background:#FBFDFC}
+.cmp-head{
+  display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.16em;
+  margin-bottom:10px;font-weight:600;
+}
+.cmp.normal .cmp-head{color:var(--ink3)}
+.cmp.patient .cmp-head{color:var(--teal)}
+.cmp-head .dot{width:7px;height:7px;border-radius:50%}
+.cmp.normal .dot{background:#C4BCAE}
+.cmp.patient .dot{background:var(--teal)}
+.cmp p{font-size:13px;line-height:1.85;margin:0;color:var(--ink2)}
+.cmp.patient p{color:#3C3A36}
+.cmp .dur{
+  display:inline-block;margin-top:11px;font-size:11px;letter-spacing:.05em;
+  font-variant-numeric:tabular-nums;padding:3px 9px;border-radius:6px;
+}
+.cmp.normal .dur{background:#EDE7DC;color:#8A8377}
+.cmp.patient .dur{background:var(--teal-soft);color:var(--teal)}
+
+.fact{
+  margin-top:16px;padding:14px 16px 14px 18px;border-left:2px solid #D9CFBD;
+  background:rgba(255,255,255,.6);border-radius:0 10px 10px 0;
+  font-size:12.5px;color:var(--ink2);line-height:1.85;
+}
+.fact b{color:var(--ink);font-weight:600;letter-spacing:.05em}
+
+.next{
+  margin-top:24px;width:100%;padding:15px;border-radius:12px;
+  background:var(--teal);color:#fff;border:0;font-family:var(--sans);
+  font-size:14.5px;letter-spacing:.09em;cursor:pointer;transition:.22s;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  box-shadow:0 10px 24px -14px rgba(23,99,95,.8);
+}
+.next:hover{background:#125451;letter-spacing:.13em;box-shadow:0 14px 28px -14px rgba(23,99,95,.9)}
+.next svg{width:15px;height:15px;transition:transform .22s}
+.next:hover svg{transform:translateX(4px)}
+
+/* ============ ENDING ============ */
+.end{max-width:760px;margin:0 auto}
+.end .kicker{
+  font-size:10.5px;letter-spacing:.34em;color:var(--teal);
+  border:1px solid #CFE0DC;background:var(--teal-soft);
+  display:inline-block;padding:5px 14px 5px 16px;border-radius:99px;margin-bottom:24px;
+}
+.end h1{font-family:var(--serif);font-size:clamp(28px,5vw,40px);font-weight:600;line-height:1.3;margin:0 0 14px}
+.end .sub{font-size:14.5px;color:var(--ink2);line-height:1.95;margin:0 0 32px;max-width:600px}
+
+.bill{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;
+  padding:28px 30px;display:flex;gap:34px;align-items:center;
+  box-shadow:var(--shadow);margin-bottom:36px;flex-wrap:wrap;
+}
+.bill-main{flex:1;min-width:180px}
+.bill-main .num{
+  font-family:var(--serif);font-size:clamp(52px,9vw,74px);font-weight:600;
+  color:var(--rose);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.bill-main .num small{font-size:19px;margin-left:4px;color:var(--ink2);font-family:var(--sans)}
+.bill-main .lbl{font-size:13px;color:var(--ink2);margin-top:10px;line-height:1.7}
+.bill-side{flex:0 0 auto;border-left:1px solid var(--line2);padding-left:32px}
+.bill-side .row{font-size:12.5px;color:var(--ink2);margin:7px 0;line-height:1.6}
+.bill-side .row b{font-family:var(--serif);font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums;margin-right:3px}
+
+.sec-h{
+  font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 6px;
+  display:flex;align-items:center;gap:11px;
+}
+.sec-h::after{content:"";flex:1;height:1px;background:var(--line)}
+.sec-note{font-size:12px;color:var(--ink3);margin:0 0 16px}
+
+table.cmp-table{
+  width:100%;border-collapse:separate;border-spacing:0;background:var(--card);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  margin-bottom:40px;font-size:13px;
+}
+table.cmp-table th,table.cmp-table td{padding:13px 16px;text-align:left;vertical-align:top;line-height:1.65}
+table.cmp-table thead th{
+  font-size:10.5px;letter-spacing:.16em;color:var(--ink3);font-weight:600;
+  border-bottom:1px solid var(--line);background:#FBF8F3;padding-top:15px;padding-bottom:13px;
+}
+table.cmp-table thead th:nth-child(3){color:var(--teal)}
+table.cmp-table thead th:nth-child(1){width:19%}
+table.cmp-table thead th:nth-child(2){width:37%}
+table.cmp-table thead th:nth-child(3){width:44%}
+table.cmp-table tbody tr{border-bottom:1px solid var(--line2)}
+table.cmp-table tbody tr:last-child{border-bottom:0}
+table.cmp-table tbody td:first-child{color:var(--ink);font-weight:500;white-space:nowrap;width:1%}
+table.cmp-table tbody td:nth-child(2){color:var(--ink3);font-size:12.5px}
+table.cmp-table tbody td:nth-child(3){color:#3C3A36;background:#FCFDFC;font-size:12.5px}
+table.cmp-table tr.total td{background:#F6F2EA;font-weight:600;padding-top:15px;padding-bottom:15px}
+table.cmp-table tr.total td:nth-child(3){background:#EAF5EF;color:var(--teal)}
+
+.facts{display:grid;gap:0;margin-bottom:40px}
+.fact-item{
+  display:flex;gap:18px;padding:18px 0;border-bottom:1px solid var(--line2);
+}
+.fact-item:first-child{border-top:1px solid var(--line2)}
+.fact-item .fi{
+  flex:0 0 26px;font-family:var(--serif);font-size:13px;color:var(--teal);
+  font-variant-numeric:tabular-nums;padding-top:2px;
+}
+.fact-item p{font-size:13.5px;line-height:1.9;color:var(--ink2);margin:0}
+.fact-item p b{color:var(--ink);font-weight:600}
+
+.closing{
+  border-radius:18px;padding:34px 32px;background:linear-gradient(150deg,#17635F,#114A47);
+  color:#fff;margin-bottom:32px;position:relative;overflow:hidden;
+}
+.closing::after{
+  content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+  border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.1),transparent 68%);
+}
+.closing p{font-family:var(--serif);font-size:clamp(17px,3vw,21px);line-height:1.85;margin:0;position:relative;z-index:1}
+.closing p + p{margin-top:14px;font-size:14px;opacity:.72;font-family:var(--sans);line-height:1.9}
+.end-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.btn-ghost{
+  padding:13px 26px;border-radius:99px;background:transparent;border:1px solid var(--line);
+  color:var(--ink2);font-family:var(--sans);font-size:13.5px;cursor:pointer;transition:.2s;
+  letter-spacing:.05em;
+}
+.btn-ghost:hover{border-color:var(--ink2);color:var(--ink)}
+.disclaimer{font-size:11.5px;color:var(--ink3);line-height:1.9;border-top:1px solid var(--line2);padding-top:20px}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:720px){
+  .hud-inner{padding:9px 16px;gap:14px}
+  .clock{min-width:58px}
+  .clock b{font-size:19px}
+  .clock small{font-size:9px}
+  .stats{gap:10px}
+  .s-label{font-size:9px;letter-spacing:.06em}
+  .cost{padding-left:10px}
+  .c-label{font-size:8.5px;letter-spacing:.04em;margin-bottom:4px}
+  .c-val b{font-size:15px}
+  .c-val i{font-size:8.5px;margin-left:1px}
+  main{padding:30px 17px 90px}
+  .picks{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .cmp.normal{border-right:0;border-bottom:1px solid var(--line)}
+  .bill{padding:22px 20px;gap:20px}
+  .bill-side{border-left:0;padding-left:0;width:100%;border-top:1px solid var(--line2);padding-top:14px;display:flex;gap:26px;flex-wrap:wrap}
+  .bill-side .row{margin:0}
+  table.cmp-table{border:0;background:transparent;border-radius:0;margin-bottom:32px}
+  table.cmp-table thead{display:none}
+  table.cmp-table tbody{display:block}
+  table.cmp-table tbody tr{
+    display:block;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:14px 16px 13px;margin-bottom:9px;
+  }
+  table.cmp-table tbody tr:last-child{border:1px solid var(--line);margin-bottom:0}
+  table.cmp-table tbody td{
+    display:block;padding:0!important;border:0;white-space:normal!important;
+    width:auto!important;font-size:12.5px;
+  }
+  table.cmp-table tbody td:first-child{
+    font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:9px;
+  }
+  table.cmp-table tbody td:nth-child(2){
+    color:var(--ink3);margin-bottom:7px;padding-left:56px!important;position:relative;
+    background:transparent!important;
+  }
+  table.cmp-table tbody td:nth-child(3){
+    color:#3C3A36;padding-left:56px!important;position:relative;background:transparent!important;
+  }
+  table.cmp-table tbody td:nth-child(2)::before,
+  table.cmp-table tbody td:nth-child(3)::before{
+    content:attr(data-l);position:absolute;left:0;top:2px;
+    font-size:10px;letter-spacing:.08em;color:#B3AB9D;
+  }
+  table.cmp-table tbody td:nth-child(3)::before{color:var(--teal)}
+  table.cmp-table tr.total{background:#F6F2EA;padding:15px 16px}
+  table.cmp-table tr.total td{background:transparent!important;font-weight:600;color:var(--ink)}
+  .cover{padding-top:6px}
+  .closing{padding:26px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body data-page-node-id="XgUz1tTvEEGbS56m06Xepe">
+<div id="app" data-page-node-id="lIuwJGLEdscyRzJHKKJ2ke">
+  <header class="hud hidden" id="hud" data-page-node-id="SK7nL8E3bn4VP2GP5CURGP">
+    <div class="hud-inner" data-page-node-id="0XyQj7b78ZwKLRTJ3vNdop">
+      <div class="clock" data-page-node-id="8pDtOy5frXyEY92rtHOuMA"><b id="clock" data-page-node-id="G2aqGGW1NcCptKiGOFrCmy">06:40</b><small id="stepLbl" data-page-node-id="gAjGqnudi22V2b7K4udrrF">1 / 9</small></div>
+      <div class="stats" data-page-node-id="cNfii2OerO4mcsoImvFWup">
+        <div class="stat" data-page-node-id="EUM5ZB3uUNymr4aiRF8Lbs"><span class="s-label" data-page-node-id="S77LKKuEG0qWGR4uIpBem0">水合状态</span><div class="bar" data-page-node-id="O3fj0gTxOQuLNB06NzmMKc"><i id="barH" style="width:75%" data-page-node-id="j8BE6FyX1yUiU6AqmDUcD2"></i></div></div>
+        <div class="stat" data-page-node-id="119h5v2NBKnhd6TO0YengG"><span class="s-label" data-page-node-id="Tt4VOdVEveHjRqd5YlYcEz">能量</span><div class="bar" data-page-node-id="VrElBcXVfOqB497vqLXxYC"><i id="barE" style="width:68%" data-page-node-id="JmqU53T5oLWghBEVH7ucib"></i></div></div>
+        <div class="stat" data-page-node-id="XZtmzlfHP7qtJhjoUvZ4g2"><span class="s-label" data-page-node-id="15B1nTv5R1GknrdYrAK6Hh">舒适度</span><div class="bar" data-page-node-id="akK9kRQSoNOeW4y5dzGyE8"><i id="barC" style="width:72%" data-page-node-id="PqBFnDfMg8ANxYfzLMjz9G"></i></div></div>
+      </div>
+      <div class="cost" data-page-node-id="aQ32xZij8vAsk9jp6YwoIc">
+        <span class="c-label" data-page-node-id="MIXppI899sbtX89l93EGy5">今日管理</span>
+        <span class="c-val" data-page-node-id="gjSVneKDftvLRAjMHsS2Cy"><b id="cost" data-page-node-id="72fFAlTItaSlQF6FyZoCci">0</b><i data-page-node-id="2ILVFVXbntMwGyuGa6Z6gL">分钟</i></span>
+      </div>
+    </div>
+    <div class="track" data-page-node-id="0kjkTLqB4drECiUetZE5zr"><div class="track-fill" id="trackFill" data-page-node-id="7UFMEHr6dmo2Gu5nMFUmQo"></div></div>
+  </header>
+  <main id="stage" data-page-node-id="TUUNbsTnnMeGSFNKDRE5DE"></main>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+var stage = document.getElementById('stage');
+var hud = document.getElementById('hud');
+
+var S = {
+  idx: 0,
+  h: 75, e: 68, c: 72,
+  mins: 0, normalMins: 0,
+  hits: 0, decisions: 0
+};
+
+/* ---------- helpers ---------- */
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+function paintHUD(){
+  document.getElementById('barH').style.width = Math.max(4, Math.min(100, S.h)) + '%';
+  document.getElementById('barE').style.width = Math.max(4, Math.min(100, S.e)) + '%';
+  document.getElementById('barC').style.width = Math.max(4, Math.min(100, S.c)) + '%';
+  var cEl = document.getElementById('cost');
+  if (cEl.textContent !== String(S.mins)) {
+    cEl.textContent = S.mins;
+    cEl.classList.remove('bump');
+    void cEl.offsetWidth;
+    cEl.classList.add('bump');
+  }
+  var sc = SCENES[S.idx];
+  document.getElementById('clock').textContent = sc ? sc.time : '23:59';
+  document.getElementById('stepLbl').textContent = Math.min(S.idx + 1, SCENES.length) + ' / ' + SCENES.length;
+  document.getElementById('trackFill').style.width = Math.min(100, (S.idx + 1) / SCENES.length * 100) + '%';
+}
+
+function applyFx(fx){
+  if (!fx) return;
+  S.h = Math.max(0, Math.min(100, S.h + (fx.h || 0)));
+  S.e = Math.max(0, Math.min(100, S.e + (fx.e || 0)));
+  S.c = Math.max(0, Math.min(100, S.c + (fx.c || 0)));
+  S.mins += (fx.m || 0);
+  S.normalMins += (fx.nm || 0);
+  paintHUD();
+}
+
+/* ---------- feedback ---------- */
+function resolve(root, fb){
+  if (root) {
+    root.querySelectorAll('button').forEach(function(b){ b.disabled = true; });
+  }
+  S.decisions++;
+  if (fb.ok) S.hits++;
+  applyFx(fb.fx);
+
+  var fbBox = document.getElementById('feedback');
+  var cls = fb.ok ? 'good' : (fb.soft ? 'mid' : 'bad');
+  var glyph = fb.ok ? '✓' : (fb.soft ? '!' : '×');
+
+  fbBox.innerHTML =
+    '<div class="fb">' +
+      '<div class="verdict ' + cls + '">' +
+        '<div class="v-icon">' + glyph + '</div>' +
+        '<div>' +
+          '<p class="vt">' + fb.title + '</p>' +
+          '<p class="vx">' + fb.text + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="compare">' +
+        '<div class="cmp normal">' +
+          '<div class="cmp-head"><span class="dot"></span>普通人</div>' +
+          '<p>' + fb.normal + '</p>' +
+          (fb.nm != null ? '<span class="dur">' + fb.nm + '</span>' : '') +
+        '</div>' +
+        '<div class="cmp patient">' +
+          '<div class="cmp-head"><span class="dot"></span>你</div>' +
+          '<p>' + fb.you + '</p>' +
+          (fb.ym != null ? '<span class="dur">' + fb.ym + '</span>' : '') +
+        '</div>' +
+      '</div>' +
+      (fb.fact ? '<div class="fact"><b>事实核查</b>　' + fb.fact + '</div>' : '') +
+      '<button class="next" id="nextBtn">继续 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>' +
+    '</div>';
+
+  document.getElementById('nextBtn').onclick = next;
+  setTimeout(function(){
+    fbBox.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 90);
+}
+
+function next(){
+  S.idx++;
+  if (S.idx >= SCENES.length) { ending(); return; }
+  render();
+}
+
+/* ---------- render ---------- */
+function render(){
+  var sc = SCENES[S.idx];
+  paintHUD();
+  stage.innerHTML =
+    '<article class="scene screen">' +
+      '<div class="scene-head"><span class="time-chip">' + sc.time + '</span><span class="tag">' + sc.tag + '</span></div>' +
+      '<h1>' + sc.title + '</h1>' +
+      '<p class="lead">' + sc.lead + '</p>' +
+      (sc.status ? '<div class="status">' + sc.status.map(function(x){ return '<span>' + x + '</span>'; }).join('') + '</div>' : '') +
+      '<p class="ask">' + (sc.ask || '你会怎么做') + '</p>' +
+      '<div id="interact"></div>' +
+      '<div class="feedback" id="feedback"></div>' +
+    '</article>';
+  sc.build(document.getElementById('interact'));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ---------- interaction builders ---------- */
+function choiceBlock(root, opts, after){
+  root.innerHTML = '<div class="choices">' + opts.map(function(o, i){
+    return '<button class="choice" data-i="' + i + '">' +
+             '<span class="ct">' + o.t + '</span>' +
+             (o.s ? '<span class="cs">' + o.s + '</span>' : '') +
+           '</button>';
+  }).join('') + '</div>';
+
+  var btns = root.querySelectorAll('.choice');
+  btns.forEach(function(b){
+    b.onclick = function(){
+      var i = +b.dataset.i;
+      var o = opts[i];
+      btns.forEach(function(x){ x.disabled = true; x.classList.add('dim'); });
+      b.classList.remove('dim');
+      b.classList.add('picked', o.ok ? 'ok' : (o.soft ? 'soft' : 'bad'));
+      if (!o.ok) {
+        var corrected = opts.findIndex(function(x){ return x.ok; });
+        if (corrected > -1) { btns[corrected].classList.remove('dim'); btns[corrected].classList.add('reveal'); }
+      }
+      after(o);
+    };
+  });
+}
+
+/* ---------- boot ---------- */
+function cover(){
+  stage.innerHTML =
+    '<section class="cover screen">' +
+      '<span class="kicker">互动科普</span>' +
+      '<h1>如果今天，<br>你是<em>短肠综合征</em>患者</h1>' +
+      '<p class="sub">你的一天，从睁眼开始，就不一样了。</p>' +
+      '<svg class="wave" viewBox="0 0 420 40" fill="none" preserveAspectRatio="none">' +
+        '<path d="M0 22c28 0 28-13 56-13s28 13 56 13 28-13 56-13 28 13 56 13 28-13 56-13 28 13 56 13 28-13 56-13 28 13 28 13" stroke="#17635F" stroke-width="1.2" stroke-linecap="round" opacity=".5"/>' +
+      '</svg>' +
+      '<p class="desc">你将替一个人过完一整天。' +
+      '<strong>9 个时间点</strong>，每个都要做真实的决定——吃什么、什么时候吃药、' +
+      '怎么喝水、洗澡该先做哪一步。<br><br>' +
+      '没有什么会真的伤害到你。但你会清楚地看见：那些对大多数人「不值得想」的小事，' +
+      '在另一个人身上，<strong>每天都要重新想一遍</strong>。</p>' +
+      '<button class="enter" id="startBtn">开始这一天' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>' +
+      '</button>' +
+      '<p class="meta"><span>约 6 分钟</span>·<span>9 个决策</span>·<span>无医学背景要求</span></p>' +
+    '</section>';
+  document.getElementById('startBtn').onclick = function(){
+    hud.classList.remove('hidden');
+    S.idx = 0;
+    render();
+  };
+}
+
+var SCENES = [];
+SCENES.push({
+  time: '06:40',
+  tag: '起床 · 第一件事',
+  title: '睁眼之后的第一件事',
+  lead: '天刚亮，你是被肚子里的声音叫醒的。床头柜上摆着三样东西：一台电子体重秤、一个带刻度的量杯、一部手机。<strong>昨晚你起了三次夜</strong>，最后一次在凌晨四点。',
+  status: ['术后 14 个月', '剩余小肠 45 cm', '中心静脉导管在位', '今日排便 0 次'],
+  ask: '清醒之后，第一件事做什么',
+  build: function(root){
+    choiceBlock(root, [
+      { t:'先去洗漱，回来再记录', s:'先让我清醒一下', ok:false },
+      { t:'排尿 → 量尿量 → 称体重 → 记进手机', s:'身体的数据，先对一次账', ok:true },
+      { t:'先灌一大杯温水，把昨晚的流失补回来', s:'渴了一整夜，先补水', ok:false, soft:true }
+    ], function(o){
+      if (o.ok) {
+        resolve(root, {
+          ok:true,
+          title:'这是更接近真实的做法',
+          text:'你把尿倒进量杯：<strong>320 ml</strong>。站上秤：比昨天轻了 <strong>0.6 kg</strong>。两个数字合起来只说明一件事——昨晚丢的，比补的多。今天白天的补液量要往上调 300 ml，夜间的肠外营养配方也该跟护士说一声。<br><br>在你身上，「体重」不是减肥指标，是<strong>液体平衡的温度计</strong>。0.5 公斤的波动，普通人一泡尿就过去了；对你，它是一整天的调参依据。',
+          normal:'上厕所，按冲水，刷牙。三十秒。一辈子重复两万多次，从没记过一次尿量。',
+          nm:'30 秒',
+          you:'量尿量、称体重、记数字、和昨天比对、决定要不要调整补液。做完这些，你还没洗脸。',
+          ym:'6 分钟',
+          fact:'短肠综合征患者需每日记录出入量与体重。成人单日体重波动超过 0.5 kg 通常提示液体失衡，而夜间往往是丢失最集中的时段。',
+          fx:{ h:8, e:2, c:4, m:6, nm:0.5 }
+        });
+      } else if (o.t.indexOf('灌') > -1) {
+        resolve(root, {
+          ok:false, soft:true,
+          title:'这一杯，可能让你上午都在厕所',
+          text:'空腹、大量、快速地喝下 300 ml 温水，对你残余的肠道是一次「洪水」。水分来不及吸收，反而因为渗透负荷把更多液体拉进肠腔——<strong>排空加快，腹泻提前</strong>。更何况你还没记录基线，现在连「丢了多少」都算不清。',
+          normal:'渴了就喝。身体自己会调节，从不需要你介入。',
+          nm:'5 秒',
+          you:'渴，但你得先知道「缺多少」，再决定「补多少」——而且要小口、分次、含钠。',
+          ym:'4 分钟',
+          fact:'空腹大量饮水会加速胃排空并增加肠腔渗透负荷，是短肠患者腹泻的常见诱因。补水应少量多次，并优先选择含钠的口服补液盐。',
+          fx:{ h:-4, c:-8, m:2, nm:0.5 }
+        });
+      } else {
+        resolve(root, {
+          ok:false,
+          title:'今天的数据，从一开始就缺了一块',
+          text:'洗漱回来，你已经想不起夜里到底起了几次、大概多少。体重秤上的数字也没有参照——昨天你忘了称。<br><br>对你来说，<strong>没有基线就没有判断</strong>。等到下午头晕、尿色变深，你只能靠猜。',
+          normal:'同上——从来不需要记。',
+          nm:'30 秒',
+          you:'你以为省了 5 分钟。实际上你把今天所有的补液决策，都变成了盲猜。',
+          ym:'0 分钟',
+          fact:'出入量记录是短肠患者家庭管理的核心工具，也是医生调整肠内/肠外营养配方的唯一客观依据。',
+          fx:{ h:-5, c:-3, m:1, nm:0.5 }
+        });
+      }
+    });
+  }
+});
+
+SCENES.push({
+  time: '07:15',
+  tag: '用药 · 那半小时',
+  title: '一片药，要提前四十分钟',
+  lead: '早餐在桌上：一小碗白粥，一碟蒸蛋。药盒里躺着今天的第一片<strong>洛哌丁胺</strong>。出院时护士说过一句话你没忘——「这个药，不是拉肚子才吃的」。',
+  status: ['距早餐 40 分钟', '今日排便 1 次', '体重 ↓0.6 kg'],
+  ask: '这片药，什么时候吃',
+  build: function(root){
+    choiceBlock(root, [
+      { t:'现在就吃，吃完马上吃饭', s:'省事，一起解决', ok:false },
+      { t:'先吃药，定一个 40 分钟后吃饭的闹钟', s:'让肠道先「慢下来」', ok:true },
+      { t:'先不吃，等拉肚子了再说', s:'按需用药，省着点', ok:false }
+    ], function(o){
+      if (o.ok) {
+        resolve(root, {
+          ok:true,
+          title:'对。这是一场提前四十分钟的布置',
+          text:'洛哌丁胺让肠道蠕动慢下来，给水分吸收争取时间。它需要<strong>提前 30–60 分钟</strong>服用，才能在你进食时已经「上岗」。<br><br>而你要算的还不止这一次：一天 4–6 次；要和奥曲肽、质子泵抑制剂、胆汁酸结合剂错开；要记得哪些餐前、哪些餐后、哪些必须空腹。',
+          normal:'早饭？吃就完了。',
+          nm:'0 分钟',
+          you:'闹钟、药盒、间隔、剂量。漏一次，上午就可能在厕所里度过。',
+          ym:'4 分钟',
+          fact:'洛哌丁胺为外周阿片受体激动剂，常规用法为餐前 30–60 分钟服用，可减少短肠患者粪便排出量。剂量与频次须个体化并遵医嘱。',
+          fx:{ e:3, c:10, m:4 }
+        });
+      } else if (o.t.indexOf('等拉肚子') > -1) {
+        resolve(root, {
+          ok:false,
+          title:'「按需」在这里行不通',
+          text:'短肠的腹泻不是偶发事件，是<strong>结构性的</strong>——吸收面积不够，这件事每天都在。等到拉了再吃，等于每次都先输一局。<br><br>这类药的意义在于「预防性减速」，不是「事后补救」。',
+          normal:'没有这个概念。',
+          nm:'0 分钟',
+          you:'每一次进食，都要提前布置一次。',
+          ym:'0 分钟',
+          fact:'短肠患者的止泻治疗以规律性预防用药为主，按需给药难以控制症状节律。',
+          fx:{ c:-5 }
+        });
+      } else {
+        resolve(root, {
+          ok:false,
+          title:'药吃了，但它还没「上班」',
+          text:'服药后立刻进食，药物尚未起效，食物已经进入肠道。对普通人这没差别；对你，蠕动没被按住，这一餐会原样快速通过。<br><br>药不是保险，<strong>时间才是</strong>。',
+          normal:'没有这个概念。',
+          nm:'0 分钟',
+          you:'每一片药都有一个「提前量」。你的生活被这些提前量切成一段一段。',
+          ym:'1 分钟',
+          fact:'药物达峰时间决定给药时机，餐前 30–60 分钟是洛哌丁胺在短肠管理中的常规建议窗口。',
+          fx:{ c:-7, m:1 }
+        });
+      }
+    });
+  }
+});
+
+SCENES.push({
+  time: '07:50',
+  tag: '第 1 餐 · 配餐',
+  title: '从七样里，挑三样',
+  lead: '一天 6–8 餐，这是第 1 餐。规则你已经背下来了：<strong>低脂、低纤维、低渗、少量</strong>。因为你的肠道没有足够的「缓冲区」——任何一次超载，都会直接变成腹泻。',
+  status: ['今日排便 1 次', '餐前药已服', '今日目标：6–8 餐'],
+  ask: '选出 3 样（多选）',
+  build: function(root){
+    var items = [
+      { n:'白粥', d:'小半碗，温的', ok:true,  why:'低渗、低渣，好吸收' },
+      { n:'蒸蛋羹', d:'一个鸡蛋', ok:true,  why:'优质蛋白，质地柔软' },
+      { n:'半根香蕉', d:'熟透的', ok:true,  why:'补钾，果胶有助成形' },
+      { n:'鲜榨橙汁', d:'一杯，无添加', ok:false, why:'高糖高渗，渗透性腹泻的典型诱因' },
+      { n:'全麦面包 + 牛奶', d:'标准健康早餐', ok:false, why:'乳糖不耐叠加高纤维，短肠常见雷区' },
+      { n:'冰美式', d:'大杯，去冰', ok:false, why:'咖啡因刺激蠕动，且有利尿作用' },
+      { n:'一小把混合坚果', d:'原味', ok:false, why:'高脂高草酸，脂肪泻与草酸盐肾结石风险' }
+    ];
+    root.innerHTML =
+      '<div class="picks" id="picks">' + items.map(function(it, i){
+        return '<button class="pick" data-i="' + i + '"><span class="mark"></span>' +
+               '<span class="pn">' + it.n + '</span><span class="pd">' + it.d + '</span></button>';
+      }).join('') + '</div>' +
+      '<button class="submit" id="sub" disabled>再选 3 样</button>';
+
+    var sel = [];
+    var picks = root.querySelectorAll('.pick');
+    var sub = document.getElementById('sub');
+
+    picks.forEach(function(b){
+      b.onclick = function(){
+        var i = +b.dataset.i;
+        var k = sel.indexOf(i);
+        if (k > -1) { sel.splice(k, 1); b.classList.remove('on'); }
+        else if (sel.length < 3) { sel.push(i); b.classList.add('on'); }
+        sub.disabled = sel.length !== 3;
+        sub.textContent = sel.length === 3 ? '确认这一餐' : '再选 ' + (3 - sel.length) + ' 样';
+      };
+    });
+
+    sub.onclick = function(){
+      picks.forEach(function(b, i){
+        b.disabled = true;
+        b.classList.remove('on');
+        if (items[i].ok) b.classList.add('right');
+        else if (sel.indexOf(i) > -1) b.classList.add('wrong');
+      });
+      var wrong = sel.filter(function(i){ return !items[i].ok; });
+      var ok = wrong.length === 0;
+      var detail;
+      if (ok) {
+        detail = '三样都对。白粥与蒸蛋提供低渣的能量和蛋白，香蕉补上夜里流失的钾。<br><br>但记住——<strong>这也只是一餐</strong>。今天还有 5 到 7 次这样的挑选，每一次都要重新算一遍。';
+      } else {
+        detail = '这一餐里有 <strong>' + wrong.length + ' 样</strong>会给你添麻烦：' +
+          wrong.map(function(i){ return '「' + items[i].n + '」——' + items[i].why; }).join('；') +
+          '。<br><br>它们对多数人是「健康食品」。对你不是。';
+      }
+      resolve(root, {
+        ok: ok,
+        title: ok ? '配得对。但这只是今天的第一次筛选' : '健康的食物，不一定是你身体能处理的',
+        text: detail,
+        normal:'打开外卖软件，看图片，选一个想吃的。热量？大概吧。',
+        nm:'2 分钟',
+        you:'站在冰箱前逐样过筛：渗透压、脂肪、纤维、乳糖、草酸盐、钾。挑出三样，用了 12 分钟。',
+        ym:'12 分钟',
+        fact:'短肠患者常需低脂、低纤维、低乳糖饮食并少量多餐（每日 6–8 餐）。高渗食物（果汁、含糖饮料）加重渗透性腹泻；广泛回肠切除者需限制草酸盐摄入以降低肾结石风险。',
+        fx: ok ? { e:8, c:6, m:12, nm:2 } : { e:2, c:-10, m:14, nm:2 }
+      });
+    };
+  }
+});
+
+SCENES.push({
+  time: '08:40',
+  tag: '喝水 · 一件需要技术的事',
+  title: '桌上那杯水，你看了三十秒',
+  lead: '早餐过去 40 分钟。嘴里发干，是那种从舌根泛上来的渴。<br><br>桌上有三样东西：一杯 300 ml 的温水、一包口服补液盐、一个 100 ml 的小杯子。',
+  status: ['距早餐 40 分钟', '尿色：淡黄', '上午补液目标 600 ml'],
+  ask: '现在，怎么喝',
+  build: function(root){
+    choiceBlock(root, [
+      { t:'一次把 300 ml 喝完，痛快', s:'渴了这么久', ok:false },
+      { t:'用 100 ml 的小杯，分三次，每次间隔 15 分钟', s:'小口，慢慢来', ok:true },
+      { t:'先忍着，等更渴了再喝', s:'少喝就少拉', ok:false }
+    ], function(o){
+      if (o.ok) {
+        resolve(root, {
+          ok:true,
+          title:'这是最不像「喝水」的喝法，也是最对的',
+          text:'每次不超过 100–150 ml，小口、分次，让液体有时间被吸收，而不是一次冲进肠腔、把更多水分一起带走。<br><br>还有一件大多数人不知道的事：<strong>你喝的不该是白水</strong>。白水不含钠，无法有效驱动水分吸收。你真正需要的是<strong>口服补液盐</strong>——钠和葡萄糖按固定比例配好，靠钠-葡萄糖协同转运把水「拉」进体内。',
+          normal:'接一杯水，仰头喝完，把杯子放下。五秒。一天八次。',
+          nm:'5 秒',
+          you:'分三次，看表，每次 100 ml。一天 12–15 次。每一次都要判断：这口该喝补液盐，还是白水。',
+          ym:'4 分钟',
+          fact:'短肠患者粪便排出量每日可达 2–4 L，需依赖口服补液盐维持钠水平衡。WHO 推荐的低渗 ORS 钠浓度 75 mmol/L，配合葡萄糖可显著提升水分吸收效率；白水与运动饮料均无法替代。',
+          fx:{ h:10, c:5, m:4, nm:0.1 }
+        });
+      } else if (o.t.indexOf('忍着') > -1) {
+        resolve(root, {
+          ok:false,
+          title:'「少喝就少拉」，是一个危险的直觉',
+          text:'短肠患者的脱水往往是隐匿的：等到明显口渴，已经是轻度脱水。而长期反复的轻度脱水会让肾灌注下降——<strong>很多患者最终不是死于肠道，而是死于肾</strong>。<br><br>你要控制的不是「喝多少」，而是「怎么喝」。',
+          normal:'渴了就喝，身体自己会喊停。',
+          nm:'5 秒',
+          you:'渴，但不敢多喝。于是你在脱水和腹泻之间，每天走一遍钢丝。',
+          ym:'2 分钟',
+          fact:'慢性脱水与草酸盐肾病是短肠患者肾功能损害的主要原因之一，部分患者最终需要肾移植评估。',
+          fx:{ h:-12, e:-4, c:-5, m:2 }
+        });
+      } else {
+        resolve(root, {
+          ok:false,
+          title:'三百毫升一次性下去，它会原路返回',
+          text:'渗透负荷陡增，胃排空加快——水分还没被吸收就被推走，还可能带走更多肠液。<br><br>「痛快」是普通人的特权。对你，痛快通常要还。',
+          normal:'痛快地喝一大杯，是再普通不过的事。',
+          nm:'5 秒',
+          you:'每一次喝水，都是一次剂量决策。',
+          ym:'3 分钟',
+          fact:'单次大量饮水会加速胃排空并增加肠腔液体负荷，是短肠患者腹泻加重的常见诱因。',
+          fx:{ h:-3, c:-9, m:3, nm:0.1 }
+        });
+      }
+    });
+  }
+});
+
+SCENES.push({
+  time: '10:40',
+  tag: '办公室 · 一杯奶茶',
+  title: '「给你也带了一杯」',
+  lead: '你回到工位。同事拎着一袋奶茶过来，把一杯放在你桌上：「给你也带了一杯，全糖去冰。」<br><br>她笑着，等你说谢谢。',
+  status: ['上午补液 500 / 600 ml', '距上次饮水 25 分钟', '今日排便 2 次'],
+  ask: '这杯奶茶，你怎么处理',
+  build: function(root){
+    choiceBlock(root, [
+      { t:'接下来，喝半杯，别扫兴', s:'人家一片好意', ok:false },
+      { t:'接下来放桌上，说「我一会儿喝」，然后换成自带的补液盐', s:'不解释，也不为难自己', ok:true },
+      { t:'直接说「我不能喝」，把杯子推回去', s:'我不想撒谎', ok:false, soft:true },
+      { t:'当场喝完，就这一次没关系', s:'偶尔一次应该没事', ok:false }
+    ], function(o){
+      if (o.ok) {
+        resolve(root, {
+          ok:true,
+          title:'你保住了关系，也保住了下午',
+          text:'「一会儿喝」是一句体面的缓冲。杯子留在桌上，你喝自己带的补液盐——没有人被冒犯，也没有人多问。<br><br>这不是撒谎，是<strong>成本最低的边界</strong>。很多患者最后学会的，不是怎么解释疾病，而是怎么不解释也能过得去。',
+          normal:'接过，插吸管，喝一口，说「谢谢」，继续敲键盘。全程零思考。',
+          nm:'10 秒',
+          you:'先算：一杯全糖奶茶约含 50 g 糖，渗透压远超肠道耐受；再想：怎么拒绝才不伤人；最后想：二十分钟后，最近的厕所在哪。',
+          ym:'3 分钟，外加一整个下午的注意力',
+          fact:'多项质性研究显示，社交进食（聚餐、同事请客、家庭饭桌）是短肠患者报告最突出的生活质量负担之一，其影响常常超过症状本身。',
+          fx:{ h:3, e:2, c:9, m:3, nm:0.2 }
+        });
+      } else if (o.t.indexOf('推回去') > -1) {
+        resolve(root, {
+          ok:false, soft:true,
+          title:'你说的是真话，但代价比想象中大',
+          text:'诚实没有错。但在职场里，「我不能喝」后面往往跟着一连串问题：为什么？你生病了？严重吗？<br><br>于是你被迫在一次下午茶里，把病史讲一遍。这不是你的错——只是<strong>每一次社交，都可能变成一次不得不做的自我暴露</strong>。',
+          normal:'不需要为「喝什么」准备任何话术。',
+          nm:'10 秒',
+          you:'在保住健康和保住体面之间，你要现场编一套说法。',
+          ym:'8 分钟',
+          fact:'患者常报告因饮食限制而回避社交场合，社交回避与病耻感、抑郁评分显著相关。',
+          fx:{ e:-2, c:-3, m:8, nm:0.2 }
+        });
+      } else if (o.t.indexOf('当场喝完') > -1) {
+        resolve(root, {
+          ok:false,
+          title:'「就这一次」，是你每周要说五次的句子',
+          text:'这一次的代价是一整个下午。而下一次，你还得重新做一次决定。<br><br>短肠患者最消耗的，往往不是某一次放纵，而是<strong>每天几十次的自我谈判</strong>。',
+          normal:'喝完了，什么也不会发生。',
+          nm:'30 秒',
+          you:'半小时后，你在会议室里算着还有几分钟能离席。',
+          ym:'5 分钟，外加一下午',
+          fact:'高糖高渗饮品会显著增加短肠患者的粪便排出量与紧迫感。',
+          fx:{ h:-5, e:-3, c:-12, m:8, nm:0.5 }
+        });
+      } else {
+        resolve(root, {
+          ok:false,
+          title:'半杯，也足够让你在会议中间离席',
+          text:'全糖奶茶的糖浓度接近 10%。对普通人是热量，对你是<strong>一次高渗负荷</strong>——水分被拉进肠腔，蠕动加快。<br><br>「只喝一半」不会让渗透压减半，它只是让你少摄入一点糖。',
+          normal:'半杯，连热量都算不上什么。',
+          nm:'1 分钟',
+          you:'半杯之后，你开始留意走廊尽头那扇门的位置。',
+          ym:'5 分钟',
+          fact:'渗透压取决于浓度而非体积，减量不能降低高渗饮品对肠道的刺激。',
+          fx:{ h:-2, c:-8, m:5, nm:0.5 }
+        });
+      }
+    });
+  }
+});
+
+SCENES.push({
+  time: '12:30',
+  tag: '第 3 餐 · 分量',
+  title: '「米饭要多少？」',
+  lead: '公司楼下的食堂。你端着餐盘站在窗口前。<br><br>阿姨问：「米饭要多少？」——这是个真问题。你的一天被切成 6–8 餐，每一餐的分量都是算过的。太多，肠道承受不了；太少，能量补不上，下午会发虚。',
+  status: ['今日排便 2 次', '上午补液 1200 ml', '今日已进食 2 次'],
+  ask: '拖动滑块，决定这一餐的分量',
+  build: function(root){
+    root.innerHTML =
+      '<div class="slider-wrap">' +
+        '<div class="slider-val" id="sv">100<small>%</small></div>' +
+        '<div class="slider-hint" id="sh">和普通人吃的一样多</div>' +
+        '<input type="range" id="rng" min="30" max="130" step="5" value="100">' +
+        '<div class="scale"><span>30%</span><span>普通人的一餐 ＝ 100%</span><span>130%</span></div>' +
+      '</div>' +
+      '<button class="submit" id="sub">就吃这么多</button>';
+
+    var rng = document.getElementById('rng');
+    var sv = document.getElementById('sv');
+    var sh = document.getElementById('sh');
+
+    function upd(){
+      var v = +rng.value;
+      sv.innerHTML = v + '<small>%</small>';
+      sh.textContent = v < 48 ? '吃完大概一小时就饿'
+                     : v < 76 ? '七八分饱，刚好放下筷子'
+                     : v < 104 ? '和普通人吃的一样多'
+                     : '吃到很撑';
+    }
+    rng.oninput = upd;
+    upd();
+
+    document.getElementById('sub').onclick = function(){
+      var v = +rng.value;
+      rng.disabled = true;
+      this.disabled = true;
+
+      if (v >= 48 && v <= 75) {
+        resolve(root, {
+          ok:true,
+          title:'对。这一餐只承担一天能量的六分之一',
+          text:'一餐 300–400 kcal，一天 6–8 次。每一次都小、慢、可控。<br><br>还有两个动作你刚才没做，但必须做：<strong>每口嚼 20 次以上</strong>，以及<strong>吃完坐着别马上躺、也别马上走</strong>。一顿 40 分钟——一天下来，光是「吃饭」这件事就占掉你五小时。',
+          normal:'打满一份，十分钟吃完，起身走人。一天三次。',
+          nm:'30 分钟 / 天',
+          you:'6 到 8 次，每次 40 分钟，每口 20 下，吃完静坐 20 分钟。',
+          ym:'5 小时 / 天',
+          fact:'短肠患者推荐少量多餐（每日 6–8 餐）、细嚼慢咽、避免高渗与高脂；进餐时限制液体摄入有助于减轻倾倒样症状。',
+          fx:{ e:9, c:6, m:40, nm:30 }
+        });
+      } else if (v > 75) {
+        resolve(root, {
+          ok:false, soft: v < 104,
+          title: v >= 104 ? '这一餐，超出了肠道的处理能力' : '已经过了那条线',
+          text:'你的肠道没有足够的吸收面积，也没有足够的「缓冲时间」。一份完整的正餐，会让食糜太快抵达远端——水分来不及吸收，渗透负荷又高，结果是<strong>倾倒样症状</strong>：腹胀、绞痛、心慌、出汗，然后是腹泻。<br><br>下午的班，你大概率上不完了。',
+          normal:'吃一份正餐，是再正常不过的事。',
+          nm:'30 分钟',
+          you:'你要把一份饭拆成六次，每一次都停在「还没满足」的地方。',
+          ym:'5 小时 / 天',
+          fact:'短肠患者单餐容量受限，过量进食可诱发倾倒综合征样表现及渗透性腹泻。',
+          fx:{ e:1, c:-12, m:45, nm:30 }
+        });
+      } else {
+        resolve(root, {
+          ok:false,
+          title:'吃太少，下午三点你会开始发抖',
+          text:'能量不足时，身体会先动用储备，然后给你一个明确的信号：手抖、发虚、注意力散。<br><br>但对你，「多吃一点」不是解决办法——你只能<strong>增加餐次</strong>，不能增加单次。所以这一餐少了，意味着两小时后你还得再吃一次。',
+          normal:'少吃一顿，正好减肥。',
+          nm:'0 分钟',
+          you:'少吃一顿，就要在日程里再挤一次吃饭的时间。',
+          ym:'5 小时 / 天',
+          fact:'短肠患者能量需求常高于常人（可达 35–40 kcal/kg/d），但受单餐容量限制，必须靠增加餐次达成。',
+          fx:{ e:-8, c:2, m:30, nm:30 }
+        });
+      }
+    };
+  }
+});
+
+SCENES.push({
+  time: '15:20',
+  tag: '突发 · 第 4 次',
+  title: '配一袋补液盐',
+  lead: '下午三点二十。这是今天第 4 次。<br><br>绞痛从脐周升起来，你熟悉这个前奏。十分钟后你从卫生间出来，手心是凉的，心跳有点快。<br><br>桌上有包装好的口服补液盐。你要自己配。',
+  status: ['今日排便 4 次', '估计丢失 600 ml', '手心发凉 · 心率偏快'],
+  ask: '把这一袋补液盐配好',
+  build: function(root){
+    var groups = [
+      { q:'兑多少水', note:'包装说明：一袋兑 ——', opts:['100 ml','250 ml','500 ml'], ans:1 },
+      { q:'水温', note:'', opts:['冰水','温水','刚烧开的水'], ans:1 },
+      { q:'还要额外加点什么吗', note:'', opts:['什么都不加','一勺白糖','一小撮盐','一勺蜂蜜'], ans:0 }
+    ];
+    var picked = [-1, -1, -1];
+
+    root.innerHTML =
+      '<div class="formula">' + groups.map(function(g, gi){
+        return '<div class="fgroup"><div class="fq">' + g.q + (g.note ? '<span>' + g.note + '</span>' : '') + '</div>' +
+          '<div class="fopts">' + g.opts.map(function(op, oi){
+            return '<button class="fopt" data-g="' + gi + '" data-o="' + oi + '">' + op + '</button>';
+          }).join('') + '</div></div>';
+      }).join('') + '</div>' +
+      '<button class="submit" id="sub" disabled>再选 ' + 3 + ' 项</button>';
+
+    var opts = root.querySelectorAll('.fopt');
+    var sub = document.getElementById('sub');
+
+    function refresh(){
+      var done = picked.filter(function(x){ return x > -1; }).length;
+      sub.disabled = done !== 3;
+      sub.textContent = done === 3 ? '冲好，喝下去' : '还差 ' + (3 - done) + ' 项';
+    }
+
+    opts.forEach(function(b){
+      b.onclick = function(){
+        var gi = +b.dataset.g, oi = +b.dataset.o;
+        root.querySelectorAll('.fopt[data-g="' + gi + '"]').forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        picked[gi] = oi;
+        refresh();
+      };
+    });
+
+    sub.onclick = function(){
+      opts.forEach(function(b){
+        b.disabled = true;
+        var gi = +b.dataset.g, oi = +b.dataset.o;
+        if (oi === groups[gi].ans) b.classList.add('reveal');
+        else if (b.classList.contains('on')) { b.classList.remove('on'); b.classList.add('wrong'); }
+      });
+      var allOk = picked.every(function(v, i){ return v === groups[i].ans; });
+      resolve(root, {
+        ok: allOk,
+        title: allOk ? '配比对了。这一步不能凭感觉' : '按「感觉」配的补液盐，可能越喝越糟',
+        text: allOk
+          ? '一袋兑 250 ml 温水，不加糖、不加盐、不加蜂蜜。口服补液盐的价值全在<strong>比例</strong>上——钠和葡萄糖的浓度是算好的，靠协同转运把水吸进体内。糖多了，渗透压升高，反而把水拉进肠腔；盐多了，更渴、也更拉。<br><br>喝完 200–300 ml，坐下休息。然后：记录这次丢失量、检查肛周或造口周围皮肤、补一片锌。'
+          : '正确配法是：<strong>一袋兑 250 ml 温水，什么都不加</strong>。自行加糖会抬高渗透压，等于给腹泻加了一把劲；加盐会加剧口渴与钠负荷；蜂蜜本质还是糖。冰水刺激蠕动，刚烧开的水会破坏配方稳定性。<br><br>这不是「差不多就行」的事——你依赖它活着。',
+        normal:'拉肚子：喝点热水，睡一觉，明天就好了。',
+        nm:'0 分钟',
+        you:'配比精确到毫升、补 300 ml、记录丢失量、检查皮肤、补锌，然后把下午剩下的工作挪到明天。',
+        ym:'15 分钟',
+        fact:'ORS 的疗效取决于钠-葡萄糖配比。自行加糖或加盐会破坏渗透压设计、加重腹泻。短肠患者腹泻发作时还应注意锌与碳酸氢盐丢失，以及肛周/造口周围皮肤的屏障损伤。',
+        fx: allOk ? { h:12, e:-2, c:6, m:15 } : { h:-4, c:-8, m:18 }
+      });
+    };
+  }
+});
+
+SCENES.push({
+  time: '20:00',
+  tag: '导管 · 一次无菌流程',
+  title: '洗澡，要先做四件事',
+  lead: '你的锁骨下方，有一根<strong>中心静脉导管</strong>。它是夜间肠外营养唯一的通路——也是你身上最脆弱的一处。<br><br>今天要洗澡。四件事，顺序很重要。',
+  status: ['今日补液 1450 ml', '今晚肠外营养 10 小时', '导管出口：干燥，无渗液'],
+  ask: '按正确的顺序依次点击',
+  build: function(root){
+    var steps = [
+      '检查导管出口的敷料是否干燥、完整、有无渗液',
+      '用防水透明贴膜把出口和接头完全覆盖',
+      '淋浴。水流不直接冲淋导管，不泡澡',
+      '洗后立刻擦干，撕膜检查，按需换药'
+    ];
+    var order = [2, 0, 3, 1];
+
+    root.innerHTML =
+      '<div class="seq" id="seq">' + order.map(function(idx){
+        return '<button class="seq-item" data-i="' + idx + '"><span class="num">·</span><span>' + steps[idx] + '</span></button>';
+      }).join('') + '</div>' +
+      '<button class="submit" id="sub" disabled>还差 4 步</button>';
+
+    var picked = [];
+    var btns = root.querySelectorAll('.seq-item');
+    var sub = document.getElementById('sub');
+
+    btns.forEach(function(b){
+      b.onclick = function(){
+        var i = +b.dataset.i;
+        var k = picked.indexOf(i);
+        if (k > -1) {
+          picked.splice(k, 1);
+          b.classList.remove('on');
+        } else {
+          picked.push(i);
+          b.classList.add('on');
+        }
+        btns.forEach(function(x){
+          var p = picked.indexOf(+x.dataset.i);
+          var n = x.querySelector('.num');
+          n.textContent = p > -1 ? (p + 1) : '·';
+        });
+        sub.disabled = picked.length !== 4;
+        sub.textContent = picked.length === 4 ? '确认这个顺序' : '还差 ' + (4 - picked.length) + ' 步';
+      };
+    });
+
+    sub.onclick = function(){
+      btns.forEach(function(b){
+        b.disabled = true;
+        var i = +b.dataset.i;
+        b.classList.remove('on');
+        b.classList.add(i === picked.indexOf(i) ? 'rt' : 'rw');
+      });
+      var ok = picked.length === 4 && picked.every(function(v, i){ return v === i; });
+      resolve(root, {
+        ok: ok,
+        title: ok ? '顺序对了。这套动作你做了一两年' : '顺序错了，防护就漏了一环',
+        text: ok
+          ? '先评估，再防护，再清洗，最后复核。任何一步跳过，风险都不是「今天难受一下」——<strong>导管相关血流感染</strong>意味着发烧、住院、拔管、重新置管。有时几天，有时几周。<br><br>而这只是「洗澡」。'
+          : '正确的顺序是：<strong>先检查敷料</strong>（如果已经潮湿或松动，要先处理再洗澡）→ <strong>贴防水膜</strong>（出口和接头都要盖住）→ <strong>淋浴</strong>（水不直冲，不泡澡）→ <strong>洗后立刻擦干并复核</strong>。<br><br>反过来做，等于让水先进去、再想怎么挡。',
+        normal:'脱衣服，进去，洗，出来。',
+        nm:'10 分钟',
+        you:'评估敷料、贴膜、控制水流方向、洗后立即检查。一次 20 分钟，一周三次，两年三百次。',
+        ym:'20 分钟',
+        fact:'长期肠外营养依赖中心静脉通路，导管相关血流感染（CRBSI）是最常见且最危险的并发症之一。规范的出口护理与淋浴防护可显著降低感染率。',
+        fx: ok ? { c:6, m:20, nm:10 } : { c:-6, m:22, nm:10 }
+      });
+    };
+  }
+});
+
+SCENES.push({
+  time: '23:30',
+  tag: '夜里 · 报警',
+  title: '凌晨两点十七分',
+  lead: '灯关了。输液泵在床头，滴答。<br><br>今天你已经起了两次夜。凌晨两点十七分，泵突然报警——尖锐、规律、不肯停。',
+  status: ['今日排便 6 次', '夜间肠外营养 剩余 4 小时', '已起夜 2 次'],
+  ask: '你怎么办',
+  build: function(root){
+    choiceBlock(root, [
+      { t:'按掉报警，翻个身继续睡', s:'明天再说', ok:false },
+      { t:'开灯，顺着管路查：打折？气泡？电量？接口松了？', s:'三十秒能查完', ok:true },
+      { t:'推醒旁边的人，让他来处理', s:'我实在太累了', ok:false, soft:true },
+      { t:'拔掉针，今晚不输了', s:'反正剩得不多', ok:false }
+    ], function(o){
+      if (o.ok) {
+        resolve(root, {
+          ok:true,
+          title:'这是今晚第二次。你闭着眼睛也知道该查哪儿',
+          text:'管路打折、进空气、电池低、接口松——四种原因，你三十秒能排查完。处理完，重新躺下，睡意已经散了。<br><br>三个小时之后，你还得起一次。<strong>睡眠被切成三四段</strong>，是短肠患者最普遍、也最少被提及的日常。',
+          normal:'一觉到天亮。闹钟响之前，什么都不会发生。',
+          nm:'8 小时连续',
+          you:'10 小时输液、2–3 次报警、2–4 次起夜。',
+          ym:'4–6 小时，碎片化',
+          fact:'短肠患者的睡眠碎片化与日间疲劳、焦虑、抑郁高度相关。夜间肠外营养虽让患者白天脱离输液，但设备报警、体位限制与排尿需求共同破坏了睡眠结构。',
+          fx:{ c:7, m:3 }
+        });
+      } else if (o.t.indexOf('拔掉') > -1) {
+        resolve(root, {
+          ok:false,
+          title:'今晚最危险的一个选择',
+          text:'拔掉中心静脉导管，不是「关掉一台机器」。非无菌拔除或导管移位可能带来出血、空气栓塞；而在下一个通路建立之前，你只能靠外周静脉——<strong>外周静脉撑不住高渗的营养液</strong>。<br><br>「剩得不多」说的是一袋液体，不是你的通路。',
+          normal:'睡眠不会被任何东西打断。',
+          nm:'8 小时连续',
+          you:'你要在极度疲惫的时候，依然做出不会伤到自己的决定。',
+          ym:'30 分钟，外加明天的一趟急诊',
+          fact:'中心静脉导管的非计划性拔除可导致空气栓塞、出血及治疗中断，须由专业人员评估处理。',
+          fx:{ h:-6, e:-5, c:-14, m:30 }
+        });
+      } else if (o.t.indexOf('推醒') > -1) {
+        resolve(root, {
+          ok:false, soft:true,
+          title:'可以，但今晚可以，三百个夜晚呢',
+          text:'有人帮忙是真的重要。但照护者的睡眠同样在被消耗——很多家属在几年里也拖出了自己的问题。<br><br>更现实的是：<strong>这些事最终还是要你自己会</strong>。因为总有一天，旁边没有人。',
+          normal:'不需要为「半夜谁起来」这件事做任何安排。',
+          nm:'0 分钟',
+          you:'你要学会所有操作，同时学会什么时候求助、什么时候不。',
+          ym:'10 分钟',
+          fact:'短肠患者的家庭照护者普遍存在睡眠不足与照护负担，照护者支持是长期管理的重要组成部分。',
+          fx:{ c:-2, m:10 }
+        });
+      } else {
+        resolve(root, {
+          ok:false,
+          title:'报警不是噪音，是它在说话',
+          text:'管路打折会让泵压升高停机；空气进入管路有栓塞风险；电池耗尽会中断输液。按掉报警，问题还在原地，而且更安静了。<br><br>但你也可以承认：凌晨两点被吵醒第三次的时候，人确实会想按掉它。',
+          normal:'没有东西会在半夜响。',
+          nm:'0 分钟',
+          you:'六分钟后，报警又响了。这次声音更大。',
+          ym:'15 分钟',
+          fact:'输液泵报警需即时处理，忽略报警可能导致输注中断、空气进入或导管相关并发症。',
+          fx:{ h:-4, e:-4, c:-10, m:15 }
+        });
+      }
+    });
+  }
+});
+
+/* ---------- ending ---------- */
+function ending(){
+  paintHUD();
+  var mins = S.mins;
+  var hours = (mins / 60).toFixed(1);
+
+  var rows = [
+    ['喝水', '端起杯子就喝。一天 6–8 次，从不需要想。', '计量、分次、配比。一天 12–15 次，每次都要判断「这口喝什么」。'],
+    ['吃饭', '3 顿，每顿 20 分钟，想吃什么点什么。', '6–8 顿，每顿 40 分钟，逐项筛渗透压、脂肪、纤维、乳糖、草酸盐。'],
+    ['排便', '1–2 次，2 分钟，冲掉就忘。', '8–15 次。夜里还要 2–4 次。每次都要记录、补液、查皮肤。'],
+    ['洗澡', '10 分钟。', '20 分钟，外加一套无菌流程。一周三次，做了两年。'],
+    ['睡觉', '8 小时，连续。', '4–6 小时，被报警和起夜切成三四段。'],
+    ['出门', '拿上手机就走。', '先查厕所在哪，带补液盐、带药、算好时间窗口。'],
+    ['被人请客', '说谢谢。', '先算糖、再想话术、最后想厕所。']
+  ];
+
+  stage.innerHTML =
+    '<section class="end screen">' +
+      '<span class="kicker">23:59 · 这一天结束了</span>' +
+      '<h1>你没有做错什么。<br>你只是把别人不用想的事，想了四十遍。</h1>' +
+      '<p class="sub">下面是这一天的账单。它不算夸张——真实的患者，每天如此，而且没有「结束」这个按钮。</p>' +
+
+      '<div class="bill">' +
+        '<div class="bill-main">' +
+          '<div class="num">' + mins + '<small>分钟</small></div>' +
+          '<div class="lbl">今天，你为「让身体正常运转」这件事<br>亲手花掉的时间（约 ' + hours + ' 小时）。<br>同一批事，普通人约 20 分钟。</div>' +
+        '</div>' +
+        '<div class="bill-side">' +
+          '<div class="row"><b>' + S.hits + '/9</b> 决策做对</div>' +
+          '<div class="row"><b>' + Math.round(S.h) + '</b> 水合状态</div>' +
+          '<div class="row"><b>' + Math.round(S.e) + '</b> 能量</div>' +
+          '<div class="row"><b>' + Math.round(S.c) + '</b> 舒适度</div>' +
+        '</div>' +
+      '</div>' +
+
+      '<h2 class="sec-h">同一件事，两个人</h2>' +
+      '<p class="sec-note">这不是「谁更辛苦」的比较，是「注意力去向」的比较。</p>' +
+      '<table class="cmp-table">' +
+        '<thead><tr><th>同一件事</th><th>普通人</th><th>你</th></tr></thead>' +
+        '<tbody>' +
+          rows.map(function(r){
+            return '<tr><td>' + r[0] + '</td><td data-l="普通人">' + r[1] + '</td><td data-l="你">' + r[2] + '</td></tr>';
+          }).join('') +
+          '<tr class="total"><td>一天为「维持」额外付出</td><td data-l="普通人">≈ 20 分钟</td><td data-l="你">≈ 3 小时 40 分</td></tr>' +
+        '</tbody>' +
+      '</table>' +
+
+      '<h2 class="sec-h">关于短肠综合征</h2>' +
+      '<p class="sec-note">如果你只记住五件事，请记这五件。</p>' +
+      '<div class="facts">' +
+        '<div class="fact-item"><span class="fi">01</span><p>短肠综合征是<b>肠道吸收面积不足</b>导致的慢性肠衰竭状态，常见于肠扭转、肠系膜血管栓塞、克罗恩病广泛切除、严重外伤等。成人剩余小肠少于 200 cm 即可能出现症状，少于 100 cm 多需长期肠外营养支持。</p></div>' +
+        '<div class="fact-item"><span class="fi">02</span><p>治疗的核心叫<b>肠康复</b>：用肠内营养刺激肠道适应、用 GLP-2 类似物（如替度鲁肽）促进黏膜生长、再加上极其精细的液体与药物管理。它是一条很长的路，但不是没有路。</p></div>' +
+        '<div class="fact-item"><span class="fi">03</span><p>夜间肠外营养让人白天可以脱离输液、去上班、去上学。代价是<b>睡眠</b>，以及中心静脉导管带来的感染风险——那是他们身上最重要也最脆弱的一根线。</p></div>' +
+        '<div class="fact-item"><span class="fi">04</span><p>口服补液盐的<b>钠-葡萄糖配比</b>决定吸收效率。白水、运动饮料、果汁都不能替代。腹泻时随意加糖，往往越喝越糟——这一点，很多患者是出院很久之后才真正明白的。</p></div>' +
+        '<div class="fact-item"><span class="fi">05</span><p>很多患者<b>看起来并不像生病</b>。他们学会了在饭桌上不动声色、在会议中间算好离席时间、在深夜自己处理报警。这恰恰是这种病最容易被低估的地方。</p></div>' +
+      '</div>' +
+
+      '<div class="closing">' +
+        '<p>「能吃是福」这句话，他们要重新学一遍——<br>吃，是要算的；喝，是要算的；<br>连「什么时候可以不管」，也是要算的。</p>' +
+        '<p>下一次你在饭桌上遇到那个「什么都不能吃」的人，不必追问原因。让他安静地吃他那份就好。</p>' +
+      '</div>' +
+
+      '<div class="end-actions">' +
+        '<button class="btn-ghost" id="againBtn">再过一天</button>' +
+        '<button class="btn-ghost" id="topBtn">回到开头</button>' +
+      '</div>' +
+
+      '<p class="disclaimer">本作品为科普互动演示，用于帮助公众理解短肠综合征患者的日常管理负担，<b>不构成任何医疗建议</b>。具体饮食、用药与导管护理方案须遵循主治医师与营养支持团队的个体化指导。部分数值（排便次数、补液量等）为典型情境示意，个体差异较大。</p>' +
+    '</section>';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  document.getElementById('againBtn').onclick = function(){
+    S.h = 75; S.e = 68; S.c = 72;
+    S.mins = 0; S.normalMins = 0; S.hits = 0; S.decisions = 0; S.idx = 0;
+    render();
+  };
+  document.getElementById('topBtn').onclick = function(){
+    S.h = 75; S.e = 68; S.c = 72;
+    S.mins = 0; S.normalMins = 0; S.hits = 0; S.decisions = 0; S.idx = 0;
+    hud.classList.add('hidden');
+    cover();
+  };
+}
+
+
+cover();
+paintHUD();
+hud.classList.add('hidden');
+})();
+</script>
+</body>
+</html>
